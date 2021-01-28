@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain:mule-domain
+xmlns:validation="http://www.mulesoft.org/schema/mule/validation"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	        xmlns="http://www.mulesoft.org/schema/mule/core"
+        xmlns:domain="http://www.mulesoft.org/schema/mule/ee/domain"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+        xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd 
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+               http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+               http://www.mulesoft.org/schema/mule/ee/domain http://www.mulesoft.org/schema/mule/ee/domain/current/mule-domain-ee.xsd">
+
+    <!-- configure here resource to be shared within the domain -->
+    <http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="69abce10-44a9-417e-ac15-c694380de7ca" >
+		<http:listener-connection host="0.0.0.0" port="${http.port}" />
+	</http:listener-config>
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="c5d4f542-75eb-4daa-9fdc-c69ddaeaf157" >
+		<db:my-sql-connection host="${db.host}" port="${db.port}" user="${db.user}" password="${db.password}" database="${db.database}" />
+	</db:config>
+	<validation:config name="Validation_Config" doc:name="Validation Config" doc:id="6c60ba2d-2195-426a-90ad-16c68e27d5a7" />
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="385e6528-dbb1-415c-9fa5-1843d6d282c1" basePath="/api/timezone" >
+		<http:request-connection host="http://worldtimeapi.org" port="80" />
+	</http:request-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="42e447d2-3ec8-4428-99a2-6bb38be4b190" file="config.yaml" />
+
+</domain:mule-domain>
